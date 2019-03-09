@@ -468,33 +468,10 @@ if (0) {
 ?>
 <!--
 # --- BEGIN PLUGIN HELP ---
-<div id="smd_help">
-
     <h1>smd_ plugin library</h1>
 
     <p>Offers no public textpattern tags. It is simply a shared library of common functions used by smd_ plugins.</p>
 
-    <h2>Changelog</h2>
-
-    <ul>
-        <li>v0.1   07-02-25 Initial public release</li>
-        <li>v0.2   07-03-03 Added: <span class="caps"><span class="caps">MLP</span></span> (Multi-Lingual Pack) library support</li>
-        <li>v0.21  07-03-06 Added: integer range functionality. <code>smd_getAtts</code> now takes a RegEx arg</li>
-        <li>v0.21a 07-03-21 Fixed: Character ranges ignored (thanks mrdale)</li>
-        <li>v0.21b 07-04-02 Fixed: Sticky article support in <code>smd_getAtts</code> (thanks pieman)</li>
-        <li>v0.21c 07-07-29 Fixed: Numeric ranges in categories (thanks wolle)</li>
-        <li>v0.21d 07-08-03 Fixed: Negation with multiple elements</li>
-        <li>v0.21e 07-09-14 Fixed: Ability to leave empty splitRange parameters intact</li>
-        <li>v0.22  07-09-20 Fixed: Undefined index warnings (thanks Ambitiouslemon). Enhanced matches so spaces are allowed in strings (thanks DrRogg)</li>
-        <li>v0.23  07-04-09 <span class="caps">BETA</span> : Added the FuzzyFind class and getWord function. getAtts() now allows <code>?q</code></li>
-        <li>v0.3   07-10-29 Rewrote <code>smd_getAtts</code> as <code>smd_getOpts</code> to allow replaced vars within text. Deprecated <code>smd_getAtts</code>, added <code>smd_pregPos</code>. Changed <code>smd_splitRange</code> as <code>smd_split</code> to allow ranges to be switched on or off. Deprecated <code>smd_splitRange</code>. Added generic <span class="caps">MLP</span> class support (<code>smd_MLP</code>). Deprecated <code>smdMLP</code> array, <code>smd_gTxt</code> and <code>smd_getCaller</code>. Made <code>smd_FuzzyFind</code> and <code>smd_getWord</code> official</li>
-        <li>v0.31  07-11-27 Removed <code>smdMLP</code> array, <code>smd_gTxt</code> and <code>smd_getCaller</code>. Deprecated <code>smd_getSubCats</code>. Added a few PHP4 helper functions</li>
-        <li>v0.32  08-03-29 Removed <code>smd_getAtts</code> and <code>smd_getSubCats</code>. Deprecated <code>smd_getOpts</code> and <code>smd_split</code>. Added <code>smd_doList</code>. Moved the <code>smd_FuzzyFind</code> class and <code>smd_getWord</code> into the smd_fuzzy_find plugin where they should have been all along</li>
-        <li>v0.33  08-12-02 Undeprecated(!) <code>smd_split</code> since it&#8217;s actually quite useful ; extended <code>smd_doList</code> to encompass <code>$thisimage</code> (for future) and <code>$variable</code> ; fixed bug in <code>smd_doList</code> when using subcats</li>
-        <li>v0.34  08-12-13 <code>smd_doList</code> uses a unicode regex</li>
-        <li>v0.35  09-02-24 <code>smd_doList</code> fixed ranges in &#8216;?&#8217; variables (thanks koobs)</li>
-        <li>v0.36  09-04-02 <code>smd_doList</code> falls back to <span class="caps">ASCII</span> if Unicode not available (thanks RedFox / mlarino / decoderltd)</li>
-    </ul>
 
     <h2>Function Reference</h2>
 
@@ -606,8 +583,6 @@ Instantiate one of these to handle <acronym title="Multi-Lingual Pack"><span cla
     <p><strong>htmlspecialchars_decode</strong></p>
 
     <p>PHP4 equivalent of the standard PHP5 function, lifted from php.net</p>
-
-</div>
 # --- END PLUGIN HELP ---
 -->
 <?php

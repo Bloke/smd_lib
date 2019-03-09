@@ -1,0 +1,91 @@
+h1. Changelog
+
+h2. 0.37 - 2019-03-09
+
+* PHP 7 compatibility
+
+h2. 0.36 - 2009-04-02
+
+* @smd_doList@ falls back to ASCII if Unicode not available (thanks RedFox / mlarino / decoderltd)
+
+h2. 0.35 - 2009-02-24
+
+* @smd_doList@ fixed ranges in '?' variables (thanks koobs)
+
+h2. 0.34 - 2008-12-13
+
+* @smd_doList@ uses a unicode regex
+
+h2. 0.33 - 2008-12-02
+
+* Undeprecated(!) @smd_split@ since it's actually quite useful
+* Extended @smd_doList@ to encompass @$thisimage@ (for future) and @$variable@
+* Fixed bug in @smd_doList@ when using subcats
+
+h2. 0.32 - 2008-03-29
+
+* Removed @smd_getAtts@ and @smd_getSubCats@
+* Deprecated @smd_getOpts@ and @smd_split@
+* Added @smd_doList@
+* Moved the @smd_FuzzyFind@ class and @smd_getWord@ into the smd_fuzzy_find plugin where they should have been all along
+
+h2. 0.31 - 2007-11-27
+
+* Removed @smdMLP@ array, @smd_gTxt@ and @smd_getCaller@
+* Deprecated @smd_getSubCats@
+* Added a few PHP4 helper functions
+
+h2. 0.30 - 2007-10-29
+
+* Rewrote @smd_getAtts@ as @smd_getOpts@ to allow replaced vars within text
+* Deprecated @smd_getAtts@
+* Added @smd_pregPos@
+* Changed @smd_splitRange@ as @smd_split@ to allow ranges to be switched on or off
+* Deprecated @smd_splitRange@
+* Added generic MLP class support (@smd_MLP@)
+* Deprecated @smdMLP@ array, @smd_gTxt@ and @smd_getCaller@
+* Made @smd_FuzzyFind@ and @smd_getWord@ official
+
+h2. 0.23-beta - 2007-04-09
+
+* Added the FuzzyFind class and getWord function
+* @getAtts()@ now allows @?q@
+
+h2. 0.22 - 2007-09-20
+
+* Fixed undefined index warnings (thanks Ambitiouslemon)
+* Enhanced matches so spaces are allowed in strings (thanks DrRogg)
+
+h2. 0.21e - 2007-09-14
+
+* Fixed ability to leave empty splitRange parameters intact
+
+h2. 0.21d - 2007-08-03
+
+* Fixed negation with multiple elements
+
+h2. 0.21c - 2007-07-29
+
+* Fixed numeric ranges in categories (thanks wolle)
+
+h2. 0.21b - 2007-04-02
+
+* Fixed sticky article support in @smd_getAtts@ (thanks pieman)
+
+h2. 0.21a - 2007-03-21
+
+* Fixed character ranges ignored (thanks mrdale)
+
+h2. 0.21 - 2007-03-06
+
+* Added integer range functionality
+* @smd_getAtts@ now takes a RegEx arg
+
+h2. 0.20 - 2007-03-03
+
+* Added MLP (Multi-Lingual Pack) library support
+
+h2. 0.10 - 2007-02-25
+
+* Initial public release
+
