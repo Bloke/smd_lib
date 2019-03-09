@@ -468,121 +468,107 @@ if (0) {
 ?>
 <!--
 # --- BEGIN PLUGIN HELP ---
-    <h1>smd_ plugin library</h1>
+h1. smd_ plugin library
 
-    <p>Offers no public textpattern tags. It is simply a shared library of common functions used by smd_ plugins.</p>
+Offers no public textpattern tags. It is simply a shared library of common functions used by smd_ plugins.
 
+h2. Function Reference
 
-    <h2>Function Reference</h2>
+*smd_addQSVar*
+*smd_removeQSVar*
 
-    <p><strong>smd_addQSVar</strong><br />
-<strong>smd_removeQSVar</strong></p>
+Add or remove a query string variable to the given URL, taking into account any existing variables that may be in the URL already. 'Add' takes three arguments, 'Remove' just takes the first two:
 
-    <p>Add or remove a query string variable to the given <span class="caps">URL</span>, taking into account any existing variables that may be in the <span class="caps">URL</span> already. &#8216;Add&#8217; takes three arguments, &#8216;Remove&#8217; just takes the first two:</p>
+# The URL string to add to/remove from
+# The id of the querystring (the bit before the = sign)
+# The value of the new querystring (the bit after the = sign)
 
-    <ol>
-        <li>The <span class="caps">URL</span> string to add to/remove from</li>
-        <li>The id of the querystring (the bit before the = sign)</li>
-        <li>The value of the new querystring (the bit after the = sign)</li>
-    </ol>
+e.g. @smd_addQSVar($thisarticle['url_title'], 'tpg', 15);@ would add @tpg=15@ to the current article's URL. If there are no other variables currently in the URL, it is added with a question mark, otherwise it is appended with an ampersand.
 
-    <p>e.g. <code>smd_addQSVar($thisarticle[&#39;url_title&#39;], &#39;tpg&#39;, 15);</code> would add <code>tpg=15</code> to the current article&#8217;s <span class="caps">URL</span>. If there are no other variables currently in the <span class="caps">URL</span>, it is added with a question mark, otherwise it is appended with an ampersand.</p>
+h3. smd_doList
 
-    <p><strong>smd_doList</strong></p>
+Return an expanded list of items with the following properties:
 
-    <p>Return an expanded list of items with the following properties:</p>
+# Anything containing '?' or '!' is checked for a match with a TXP field (@<txp:variable />@, image, file, link, global article, url POST/GET/SERVER, or individual article, in that order)
+# Any ranges of items are expanded (e.g. 4-7 => 4,5,6,7) if the @rng@ option permits it
+# TXP fields may themselves be lists or ranges
+# Anything that is not a TXP field is used verbatim
+# The items are returned as 2 lists; inclusion and exclusion
 
-    <ol>
-        <li>Anything containing &#8216;?&#8217; or &#8216;!&#8217; is checked for a match with a <span class="caps">TXP</span> field (<code>&lt;txp:variable /&gt;</code>, image, file, link, global article, url <span class="caps">POST</span>/GET/SERVER, or individual article, in that order)</li>
-        <li>Any ranges of items are expanded (e.g. 4-7 =&gt; 4,5,6,7) if the <code>rng</code> option permits it</li>
-        <li><span class="caps">TXP</span> fields may themselves be lists or ranges</li>
-        <li>Anything that is not a <span class="caps">TXP</span> field is used verbatim</li>
-        <li>The items are returned as 2 lists; inclusion and exclusion</li>
-    </ol>
+Args ( [*] = mandatory ):
 
-    <p>Args ( [*] = mandatory ) :
-    <ol>
-        <li>[*] lst = the list as a delimited string</li>
-        <li>rng = whether to allow ranges or not (bool). Default = true</li>
-        <li>sub = the type of subcategory to traverse (image, file, link, article, none=&#8221;&#8220;) and how many levels to go down (e.g. image:2). Default = &#8216;&#8217;</li>
-        <li>qte = whether to quote each item in the array or not (bool). Default = true</li>
-        <li>dlm = the delimiter (string). Default = &#8220;,&#8221;</li>
-        <li>lax = Whether to be lax or strict about what characters constitute a field; primarily whether spaces are allowed in, say, custom fields. Default = &#8220;1&#8221;</li>
-    </ol></p>
+# [*] lst = the list as a delimited string
+# rng = whether to allow ranges or not (bool). Default = true
+# sub = the type of subcategory to traverse (image, file, link, article, none="") and how many levels to go down (e.g. image:2). Default = ''
+# qte = whether to quote each item in the array or not (bool). Default = true
+# dlm = the delimiter (string). Default = ","
+# lax = Whether to be lax or strict about what characters constitute a field; primarily whether spaces are allowed in, say, custom fields. Default = "1"
 
-    <p><strong>smd_getOpts</strong></p>
+h3. smd_getOpts
 
-    <p>Deprecated as it is mostly superseded by smd_doList; this one is clunkier but has $idprefix so it remains for now. It searches the passed string for predetermined sequences of characters and, if that sequence is in the given $allowed array, replaces it as follows:</p>
+Deprecated as it is mostly superseded by smd_doList; this one is clunkier but has $idprefix so it remains for now. It searches the passed string for predetermined sequences of characters and, if that sequence is in the given $allowed array, replaces it as follows:
 
-    <ul>
-        <li>?c = current global category (!c = not current category)</li>
-        <li>?s = current section (!s = not current section)</li>
-        <li>?t = current article title (!t = not current title)</li>
-        <li>?id = current article ID, prepended with $idprefix (!id = not current ID)</li>
-        <li>?q = current query term (!q = not current query term)</li>
-        <li>?field = contents of the current article&#8217;s field (could be a comma-separated list)</li>
-        <li>!field = not the contents of the current article&#8217;s field (could be a comma-separated list)</li>
-    </ul>
+* ?c = current global category (!c = not current category)
+* ?s = current section (!s = not current section)
+* ?t = current article title (!t = not current title)
+* ?id = current article ID, prepended with $idprefix (!id = not current ID)
+* ?q = current query term (!q = not current query term)
+* ?field = contents of the current article's field (could be a comma-separated list)
+* !field = not the contents of the current article's field (could be a comma-separated list)
 
-    <p>Integer ranges (e.g. 1-5) will be expanded into their individual values if the $allowRange option is true; anything else is returned verbatim. It outputs two arrays: the 1st contains items for inclusion, the 2nd contains items for exclusion.</p>
+Integer ranges (e.g. 1-5) will be expanded into their individual values if the $allowRange option is true; anything else is returned verbatim. It outputs two arrays: the 1st contains items for inclusion, the 2nd contains items for exclusion.
 
-    <p>Args ( [*] = mandatory ) :
-    <ol>
-        <li>[*] The string to search for matches</li>
-        <li>[*] An array containing shortcuts that are &#8220;allowed&#8221; to be found in the string (?c, ?s, ?t, ?field etc)</li>
-        <li>The prefix for ?id strings</li>
-        <li>Boolean indicating whether to allow range expansion or not</li>
-        <li>RegEx string to split options at (see smd_split)</li>
-        <li>preg_split option (see smd_split)</li>
-    </ol></p>
+Args ( [*] = mandatory ):
 
-    <p><strong>smd_split</strong></p>
+# [*] The string to search for matches
+# [*] An array containing shortcuts that are "allowed" to be found in the string (?c, ?s, ?t, ?field etc)
+# The prefix for ?id strings
+# Boolean indicating whether to allow range expansion or not
+# RegEx string to split options at (see smd_split)
+# preg_split option (see smd_split)
 
-    <p>Returns an array of items from a string of (usually) comma-separated values. If any values contain ranges of numbers like 1-5 that need &#8216;expanding&#8217; first (and $allowRange is true), they are dealt with. Takes the following arguments ( [*] = mandatory args) :</p>
+h3. smd_split
 
-    <ol>
-        <li>[*] The string to split</li>
-        <li>Boolean indicating whether to allow range expansion or not (i.e. 1-5 becomes 1,2,3,4,5)</li>
-        <li>The regular expression character classes to match. If a full RegEx starting and ending with &#8216;/&#8217; characters is supplied, the expression is used verbatim. Without the &#8216;/&#8217; characters, the expression is treated as a list of character classes to find. Defaults to &#8220;/(,|,\s)+/&#8221; which is a comma, or comma and a whitespace character.</li>
-        <li>preg_split option constant as defined in the php manual</li>
-    </ol>
+Returns an array of items from a string of (usually) comma-separated values. If any values contain ranges of numbers like 1-5 that need 'expanding' first (and $allowRange is true), they are dealt with. Takes the following arguments ( [*] = mandatory args) :
 
-    <p><strong>smd_MLP</strong><br />
-Instantiate one of these to handle <acronym title="Multi-Lingual Pack"><span class="caps">MLP</span></acronym> in your plugin like this:</p>
+# [*] The string to split
+# Boolean indicating whether to allow range expansion or not (i.e. 1-5 becomes 1,2,3,4,5)
+# The regular expression character classes to match. If a full RegEx starting and ending with '/' characters is supplied, the expression is used verbatim. Without the '/' characters, the expression is treated as a list of character classes to find. Defaults to "/(,|,\s)+/" which is a comma, or comma and a whitespace character.
+# preg_split option constant as defined in the php manual
 
-    <p>1) Declare a unique global variable, e.g. global $myPlug<br />
-2) Define your default string replacement array (doesn&#8217;t need to be global), e.g:</p>
+h3. smd_MLP
 
-    <p> $myStrings = array (&#8220;msg1&#8221; =&gt; &#8220;This is message 1&#8221;, &#8220;msg2&#8221; =&gt; &#8220;This is message 2&#8221;);</p>
+Instantiate one of these to handle MLP in your plugin like this:
 
-    <p>3) Create an <span class="caps">MLP</span> handler:</p>
+1) Declare a unique global variable, e.g. global $myPlug
+2) Define your default string replacement array (doesn't need to be global), e.g:
 
-    <p> $myPlug = new smd_MLP(&#8220;plugin_name&#8221;, &#8220;plugin_prefix&#8221;, $myStrings);</p>
+$myStrings = array ("msg1" => "This is message 1", "msg2" => "This is message 2");
 
-    <p>4) That&#8217;s it! There are two optional args to smd_MLP:
-    a) the default (full) language to use, e.g &#8220;da-dk&#8221;. Defaults to &#8220;en-gb&#8221;.
-    b) the interface the strings are for. Choose from &#8220;public&#8221; (the default), &#8220;admin&#8221; or &#8220;common&#8221;</p>
+3) Create an MLP handler:
 
-    <p>5) To use a replacement string in your code:
-    a) Make sure to import the unique global variable: e.g. global $myPlug;
-    b) Call $myPlug-&gt;gTxt(&#8220;messageID&#8221;); [ e.g. $myPlug-&gt;gTxt(&#8220;msg1&#8221;) ]
-    c) If you want to replace any args in your message string, pass an associative array as the 2nd arg to gTxt()</p>
+$myPlug = new smd_MLP("plugin_name", "plugin_prefix", $myStrings);
 
-    <p><strong>smd_doDblQuote</strong></p>
+4) That's it! There are two optional args to smd_MLP: a) the default (full) language to use, e.g "da-dk". Defaults to "en-gb". b) the interface the strings are for. Choose from "public" (the default), "admin" or "common"
 
-    <p>Alternative to the core&#8217;s doQuote(). This one dbl-quotes instead of sgl-quotes</p>
+5) To use a replacement string in your code: a) Make sure to import the unique global variable: e.g. global $myPlug; b) Call $myPlug->gTxt("messageID"); [ e.g. $myPlug->gTxt("msg1") ] c) If you want to replace any args in your message string, pass an associative array as the 2nd arg to gTxt()
 
-    <p><strong>smd_pregPos</strong></p>
+h3. smd_doDblQuote
 
-    <p>Lifted from one of the comments in the <span class="caps">PHP</span> manual, this just looks for a RegEx string within another, returning the matches it finds and the position of the first match.</p>
+Alternative to the core's doQuote(). This one dbl-quotes instead of sgl-quotes
 
-    <p><strong>array_combine</strong></p>
+h3. smd_pregPos
 
-    <p>PHP4 equivalent of the standard PHP5 function, lifted from php.net</p>
+Lifted from one of the comments in the PHP manual, this just looks for a RegEx string within another, returning the matches it finds and the position of the first match.
 
-    <p><strong>htmlspecialchars_decode</strong></p>
+h3. array_combine
 
-    <p>PHP4 equivalent of the standard PHP5 function, lifted from php.net</p>
+PHP4 equivalent of the standard PHP5 function, lifted from php.net
+
+h3. htmlspecialchars_decode
+
+PHP4 equivalent of the standard PHP5 function, lifted from php.net
+
 # --- END PLUGIN HELP ---
 -->
 <?php
